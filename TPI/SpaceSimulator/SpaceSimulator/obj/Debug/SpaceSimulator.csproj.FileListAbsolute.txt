@@ -1,0 +1,36 @@
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\SpaceSimulator.exe.config
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\SpaceSimulator.exe
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\SpaceSimulator.pdb
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.dll
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.SqlServer.dll
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.dll
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.EF6.dll
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.Linq.dll
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.xml
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.SqlServer.xml
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.xml
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.csprojResolveAssemblyReference.cache
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.Properties.Resources.resources
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.SpaceView.resources
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.csproj.GenerateResource.Cache
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.exe
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.pdb
+F:\CFPT 2016-2017\CFC\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.SpaceManagement.resources
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\SpaceSimulator.exe.config
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.exe
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.pdb
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\SpaceSimulator.exe
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\SpaceSimulator.pdb
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.dll
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.dll
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.xml
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\bin\Debug\System.Data.SQLite.xml
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.csprojResolveAssemblyReference.cache
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.Properties.Resources.resources
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.SpaceManagement.resources
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.SpaceView.resources
+C:\Users\MATAS_INFO\Desktop\TPI\SpaceSimulator\SpaceSimulator\obj\Debug\SpaceSimulator.csproj.GenerateResource.Cache
