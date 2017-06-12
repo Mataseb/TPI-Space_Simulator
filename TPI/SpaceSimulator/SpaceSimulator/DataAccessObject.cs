@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+#--------------------------------------------------------------------------
+# TPI 2017 - Auteur : Mata Sebastian
+# Nom du fichier : Space Simulator : DataAcessObject.cs
+# Date : 19 juin 2017
+#--------------------------------------------------------------------------
+# Objet d'accès à la base de données
+# Toutes les intéractions en lecture et en écriture entre le programme et la base de données sont effectuées ici
+#
+# Version 1.0 : 19 juin 2017
+#--------------------------------------------------------------------------
+*/
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -66,7 +78,7 @@ namespace SpaceSimulator
             Image.FromStream(ms));
 
             myConnection.Close();
-            
+
             return myStar;
         }
 
@@ -89,7 +101,7 @@ namespace SpaceSimulator
             byte[] img = null;
             img = DataAccessObject.ImageToByte(image);
 
-            string SQLrequest = String.Format("INSERT INTO planets ('name', 'ray', 'period', 'distanceToOrbitCenter', 'image', 'idOrbitCenter') VALUES ('{0}', '{1}', '{2}', '{3}', @image, '{4}')",
+            string SQLrequest = String.Format("INSERT INTO planets ('name', 'ray', 'period', 'distanceToOrbitCenter', 'image', 'idStar') VALUES ('{0}', '{1}', '{2}', '{3}', @image, '{4}')",
                 name, ray, period, distanceOrbitCenter, orbitCenterId);
 
             SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
@@ -101,9 +113,10 @@ namespace SpaceSimulator
             myConnection.Close();
         }
 
+
         /// <summary>
         /// (READ)
-        /// à partir d'une étoile, trouve dans la base de données toutes les plantètes qui orbitent autour de la dite étoile 
+        /// à partir d'une étoile, trouve dans la base de données toutes les planètes qui orbitent autour de la dite étoile 
         /// et pour chaque enregistrement crée un objet planète dont les données correspondant à l'enregistrement
         /// </summary>
         /// <param name="star"></param>
@@ -113,7 +126,7 @@ namespace SpaceSimulator
             List<Planet> orbitingPlanets = new List<Planet>();
             StartConnection();
 
-            string SQLrequest = String.Format("SELECT * FROM planets WHERE idOrbitCenter = {0}", star.Id);
+            string SQLrequest = String.Format("SELECT * FROM planets WHERE idStar = {0}", star.Id);
 
 
             SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
@@ -142,7 +155,7 @@ namespace SpaceSimulator
         /// <summary>
         /// (READ)
         /// à partir du nom et d'une étoile, trouve dans la base de données la planète du dit nom qui orbite autour de la dite étoile
-        /// et pour chaque enregistrement crée un objet planète dont les données correspondant à l'enregistrement
+        /// et crée un objet planète dont les données correspondant à l'enregistrement
         /// </summary>
         /// <param name="star"></param>
         /// <returns>Une planète qui orbite autour de l'étoile donnée</returns>
@@ -151,7 +164,7 @@ namespace SpaceSimulator
             Planet tmp;
             StartConnection();
 
-            string SQLrequest = String.Format("SELECT * FROM planets WHERE idOrbitCenter = {0} AND Name = '{1}'", star.Id, name);
+            string SQLrequest = String.Format("SELECT * FROM planets WHERE idStar = {0} AND Name = '{1}'", star.Id, name);
 
             SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
 
@@ -159,21 +172,23 @@ namespace SpaceSimulator
 
             reader.Read();
 
+
             MemoryStream ms = new MemoryStream((byte[])reader["image"]);
+            {
+                tmp = new Planet(
+                    star,
+                    Convert.ToInt32(reader["id"]),
+                    reader["name"].ToString(),
+                    Convert.ToDouble(reader["ray"]),
+                    Convert.ToDouble(reader["period"]),
+                    Convert.ToDouble(reader["distanceToOrbitCenter"]),
+                    Image.FromStream(ms));
+            }
 
-            tmp = (new Planet(
-                star,
-                Convert.ToInt32(reader["id"]),
-                reader["name"].ToString(),
-                Convert.ToDouble(reader["ray"]),
-                Convert.ToDouble(reader["period"]),
-                Convert.ToDouble(reader["distanceToOrbitCenter"]),
-                Image.FromStream(ms)));
-
-            
             myConnection.Close();
             return tmp;
         }
+
 
         /// <summary>
         /// (UPDATE) 
@@ -207,6 +222,153 @@ namespace SpaceSimulator
             StartConnection();
 
             string SQLrequest = String.Format("DELETE FROM planets WHERE id = {0}", destroyedPlanet.Id);
+
+            SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
+            command.ExecuteNonQuery();
+
+            myConnection.Close();
+        }
+
+
+        #endregion
+
+        #region CRUD moon
+
+        /// <summary>
+        /// (CREATE)
+        /// Insère une lune du programme dans la base de données
+        /// </summary>
+        /// <param name="name">nom</param>
+        /// <param name="ray">rayon</param>
+        /// <param name="period">durée d'une révolution</param>
+        /// <param name="distanceOrbitCenter">distance entre le centre de la lune et le centre de l'orbite</param>
+        /// <param name="image">image à afficher</param>
+        /// <param name="PlanetId">id du référentiel autour duquel la lune orbite</param>
+        public static void InsertMoon(string name, double ray, double period, double distanceOrbitCenter, Image image, int PlanetId)
+        {
+            StartConnection();
+
+            byte[] img = null;
+            img = DataAccessObject.ImageToByte(image);
+
+            string SQLrequest = String.Format("INSERT INTO moons ('name', 'ray', 'period', 'distanceToOrbitCenter', 'image', 'idPlanet') VALUES ('{0}', '{1}', '{2}', '{3}', @image, '{4}')",
+                name, ray, period, distanceOrbitCenter, PlanetId);
+
+            SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
+
+            command.Parameters.Add("@image", DbType.Binary, 20).Value = img;
+
+            command.ExecuteNonQuery();
+
+            myConnection.Close();
+        }
+        
+        /// <summary>
+        /// (READ)
+        /// à partir d'une planète, trouve dans la base de données toutes les lunes qui orbitent autour de la dite planète 
+        /// et pour chaque enregistrement crée un objet lune dont les données correspondant à l'enregistrement
+        /// </summary>
+        /// <param name="satellite"></param>
+        /// <returns></returns>
+        public static List<Moon> GetMoonsFromPlanet(Planet satellite)
+        {
+            List<Moon> orbitingMoons = new List<Moon>();
+            StartConnection();
+
+            string SQLrequest = String.Format("SELECT * FROM Moons WHERE idPlanet = {0}", satellite.Id);
+
+
+            SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
+
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                MemoryStream ms = new MemoryStream((byte[])reader["image"]);
+                {
+                    orbitingMoons.Add(new Moon(
+                        satellite,
+                        Convert.ToInt32(reader["id"]),
+                        reader["name"].ToString(),
+                        Convert.ToDouble(reader["ray"]),
+                        Convert.ToDouble(reader["period"]),
+                        Convert.ToDouble(reader["distanceToOrbitCenter"]),
+                        Image.FromStream(ms)));
+                }
+            }
+
+            myConnection.Close();
+            return orbitingMoons;
+        }
+
+        /// <summary>
+        /// (READ)
+        /// à partir du nom et d'une planète, trouve dans la base de données la lune du dit nom qui orbite autour de la dite planète
+        /// et crée un objet dont les données correspondant à l'enregistrement
+        /// </summary>
+        /// <param name="star"></param>
+        /// <returns>Une planète qui orbite autour de l'étoile donnée</returns>
+        public static Moon GetMoonFromName(string name, Planet planet)
+        {
+            Moon tmp;
+            StartConnection();
+
+            string SQLrequest = String.Format("SELECT * FROM moons WHERE idPlanet = {0} AND Name = '{1}'", planet.Id, name);
+
+            SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
+
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+
+            MemoryStream ms = new MemoryStream((byte[])reader["image"]);
+
+            tmp = (new Moon(
+                planet,
+                Convert.ToInt32(reader["id"]),
+                reader["name"].ToString(),
+                Convert.ToDouble(reader["ray"]),
+                Convert.ToDouble(reader["period"]),
+                Convert.ToDouble(reader["distanceToOrbitCenter"]),
+                Image.FromStream(ms)));
+
+
+            myConnection.Close();
+            return tmp;
+        }
+
+        /// <summary>
+        /// (UPDATE) 
+        /// Modifie une lune dans la base de donnée
+        /// </summary>
+        /// <param name="updatedMoon"></param>
+        public static void UpdateMoon(Moon updatedMoon)
+        {
+            StartConnection();
+
+            byte[] img = null;
+            img = DataAccessObject.ImageToByte(updatedMoon.Image);
+
+            string SQLrequest = string.Format("UPDATE moons SET name = '{0}', ray='{1}', period='{2}', distanceToOrbitCenter ='{3}', image=@image, idPlanet = '{4}' WHERE id = {5}",
+                updatedMoon.Name, updatedMoon.Ray, updatedMoon.Period, updatedMoon.DistanceOrbitCenter, updatedMoon.OrbitCenter.Id, updatedMoon.Id);
+
+            SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
+            command.Parameters.Add("@image", DbType.Binary, 20).Value = img;
+
+            command.ExecuteNonQuery();
+            myConnection.Close();
+        }
+
+        /// <summary>
+        /// (DELETE)
+        /// Supprime une lune de la base de données
+        /// </summary>
+        /// <param name="destroyedMoon">lune à supprimer</param>
+        public static void DeleteMoon(Moon destroyedMoon)
+        {
+            StartConnection();
+
+            string SQLrequest = String.Format("DELETE FROM moons WHERE id = {0}", destroyedMoon.Id);
 
             SQLiteCommand command = new SQLiteCommand(SQLrequest, myConnection);
             command.ExecuteNonQuery();

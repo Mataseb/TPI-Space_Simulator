@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="SpaceSimulator.Moon">
+    <Position X="0.5" Y="0.5" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Moon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceSimulator.Planet">
+    <Position X="0.5" Y="2" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAgIAAAABAAAFAAJAAgBEAIIAAIAAI=</HashCode>
+      <FileName>Planet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceSimulator.Star">
+    <Position X="0.5" Y="7.25" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>AAJCIAAAAAAACAAEgABAABQgABAAQBAAAACAAAEIgBA=</HashCode>
+      <FileName>Star.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

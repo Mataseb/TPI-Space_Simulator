@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+#--------------------------------------------------------------------------
+# TPI 2017 - Auteur : Mata Sebastian
+# Nom du fichier : Space Simulator : Planet.cs
+# Date : 19 juin 2017
+#--------------------------------------------------------------------------
+# Objet Planète
+# Squelette des planètes, hérite d'étoile, contient toutes les données nécessaires au programme ainsi que toutes les fonctions
+#
+# Version 1.0 : 19 juin 2017
+#--------------------------------------------------------------------------
+*/
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,12 +21,12 @@ namespace SpaceSimulator
 {
     public class Planet : Star
     {
-        const int RATIO_DISTANCE_ORBIT_CENTER = 5;
-
+        int _ratioDistanceOrbitCenter;
         Star _orbitCenter;
         double _distanceOrbitCenter;
         double _period;
         double _positionOnPeriod;
+        List<Moon> _moons;
 
         #region Properties
         internal Star OrbitCenter
@@ -47,7 +59,7 @@ namespace SpaceSimulator
         {
             get
             {
-                return Convert.ToInt32(_distanceOrbitCenter / RATIO_DISTANCE_ORBIT_CENTER);
+                return Convert.ToInt32(_distanceOrbitCenter / RatioDistanceOrbitCenter);
             }
         }
 
@@ -97,10 +109,48 @@ namespace SpaceSimulator
                 return angle;
             }
         }
+
+        internal List<Moon> Moons
+        {
+            get
+            {
+                return _moons;
+            }
+
+            set
+            {
+                _moons = value;
+            }
+        }
+
+        public int RatioDistanceOrbitCenter
+        {
+            get
+            {
+                return _ratioDistanceOrbitCenter;
+            }
+
+            set
+            {
+                _ratioDistanceOrbitCenter = value;
+            }
+        }
         #endregion
 
+        /// <summary>
+        /// Crée une planète, hérite d'étoile
+        /// </summary>
+        /// <param name="orbitCenter">l'étoile référentielle</param>
+        /// <param name="id">l'dentifiant en base</param>
+        /// <param name="name">le nom</param>
+        /// <param name="ray">le rayon</param>
+        /// <param name="period">la période</param>
+        /// <param name="distanceOrbitCenter">La distance au centre de l'orbite</param>
+        /// <param name="image">l'image représentant la planète</param>
         public Planet(Star orbitCenter, int id, string name, double ray, double period, double distanceOrbitCenter, Image image) : base(id, name, ray, image)
         {
+            Moons = new List<Moon>();
+            this.RatioDistanceOrbitCenter = 5;
             this.RatioRay = 2500;
             this.OrbitCenter = orbitCenter;
             this.Id = id;
@@ -109,14 +159,12 @@ namespace SpaceSimulator
             this.Period = period;
             this.DistanceOrbitCenter = distanceOrbitCenter;
             this.Image = image;
-
         }
 
-        public override string ToString()
-        {
-            return this.Name;
-        }
-
+        /// <summary>
+        /// Défini la position actuelle de la planète en fonction du zoom
+        /// </summary>
+        /// <param name="zoom"></param>
         public void SetCenterLivePosition(double zoom)
         {
             double adjacent;
@@ -128,21 +176,32 @@ namespace SpaceSimulator
 
             int X = OrbitCenter.Center.X + (int)(adjacent * zoom);
             int Y = OrbitCenter.Center.Y + (int)(oppose * zoom);
-            Center = new Point(X, Y);
+            this.Center = new Point(X, Y);
         }
         
-        public void Paint(double date, double zoom, Point view, Graphics canvas)
+        /// <summary>
+        /// Dessine la planète
+        /// </summary>
+        /// <param name="date">la date actuelle de l'univers</param>
+        /// <param name="zoom">le niveau de zoom actuel de l'univers</param>
+        /// <param name="view">la vue actuelle de l'univers</param>
+        /// <param name="drawEllipse">faut-il dessiner les ellipses?</param>
+        /// <param name="canvas">la toile sur laquelle dessiner</param>
+        public void Paint(double date, double zoom, Point view, bool drawEllipse, Graphics canvas)
         {
+            /*
             PositionOnPeriod = date % Period;
             SetCenterLivePosition(zoom);
-
+            
             //Dessine l'ellipse sur laquelle la planète orbite
-            canvas.DrawEllipse(Pens.Gray,
+            if (drawEllipse)
+            {
+                canvas.DrawEllipse(Pens.Gray,
                 (OrbitCenter.Center.X - (int)((zoom * ((DrawingDistanceOrbitCenter) + OrbitCenter.DrawingRay)))),
                 (OrbitCenter.Center.Y - (int)((zoom * ((DrawingDistanceOrbitCenter) + OrbitCenter.DrawingRay)))),
                 (int)(2 * (zoom * (DrawingDistanceOrbitCenter + OrbitCenter.DrawingRay))),
                 (int)(2 * (zoom * (DrawingDistanceOrbitCenter + OrbitCenter.DrawingRay))));
-
+            }
             
             //Dessine la planète
             canvas.DrawImage(this.Image,
@@ -150,14 +209,7 @@ namespace SpaceSimulator
                 (Center.Y - (int)(zoom * (this.DrawingRay))),
                 (int)(2 * ((zoom * (this.DrawingRay)))),
                 (int)(2 * ((zoom * (this.DrawingRay)))));
-
-            //canvas.DrawEllipse(Pens.Blue,
-            //(Center.X - (int)(zoom * (this.DrawingRay * RATIO_RAY))),
-            //(Center.Y - (int)(zoom * (this.DrawingRay * RATIO_RAY))),
-            //(int)(2 * ((zoom * (this.DrawingRay * RATIO_RAY)))),
-            //(int)(2 * ((zoom * (this.DrawingRay * RATIO_RAY)))));
-
-            
+                */
         }
     }
 }

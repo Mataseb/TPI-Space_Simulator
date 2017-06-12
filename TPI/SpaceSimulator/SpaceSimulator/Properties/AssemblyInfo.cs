@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpaceSimulator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Space Simulator")]
+[assembly: AssemblyDescription("Simulation d’un système solaire en 2D en vue du dessus. Une gestion de base de données permet de personnaliser l’espace ; d’ajouter de supprimer ou de modifier des planètes.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Mata")]
 [assembly: AssemblyProduct("SpaceSimulator")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
